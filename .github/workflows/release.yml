@@ -1,0 +1,43 @@
+name: Release Image
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ '*' ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+jobs:
+  Verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v1.4.5
+        with:
+          node-version: 14
+      - name: Setup and install dependencies
+        run: |
+          npm ci
+          npm run build
+      - name: Test
+        run: npm run test
+      - name: Newman Tests
+        run: npm run test:newman
+  Publish:
+      runs-on: ubuntu-latest
+      if: ${{ github.ref == 'refs/heads/main' }}
+      needs: [Verify]
+      steps: 
+      - uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v1.4.5
+        with:
+          node-version: 14
+      - name: Package 📦 
+        run: |
+          aws ecr-public get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin public.ecr.aws/m0q0z2r6
+          npm ci
+          npm run build
+      - name: Publish 🚀 
+        run: npm run release

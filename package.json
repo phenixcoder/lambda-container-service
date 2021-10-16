@@ -1,11 +1,22 @@
 {
-  "version": "0.1.0",
+  "name": "lambda-container-service",
+  "description": "Template to create a aws lambda compatibel function containers",
+  "author": "Balwant",
+  "version": "0.0.0-development",
   "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "keywords": [
+    "serverless",
+    "lambda",
+    "aws",
+    "nodejs",
+    "docker",
+    "container",
+    "template"
+  ],
+  "main": "app/index.js",
+  "typings": "app/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "app"
   ],
   "engines": {
     "node": ">=14"
@@ -17,7 +28,8 @@
     "test:watch": "jest --watch",
     "test:newman": "node dev-server.js --test",
     "lint": "tslint --fix -p ./tsconfig.json",
-    "prettier": "prettier --write './src/**/*.ts?(x)'"
+    "prettier": "prettier --write './src/**/*.ts?(x)'",
+    "release": "semantic-release"
   },
   "husky": {
     "hooks": {
@@ -30,29 +42,16 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "lambda-container-service",
-  "description": "Template to create a aws lambda compatibel function containers",
-  "author": "Balwant",
-  "keywords": [
-    "serverless",
-    "lambda",
-    "aws",
-    "nodejs",
-    "docker",
-    "container",
-    "template"
-  ],
-  "size-limit": [
-    {
-      "path": "dist/function.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/function.esm.js",
-      "limit": "10 KB"
-    }
-  ],
+  "dependencies": {
+    "winston": "^3.3.3"
+  },
   "devDependencies": {
+    "@semantic-release-plus/docker": "^2.5.0",
+    "@semantic-release/changelog": "^6.0.0",
+    "@semantic-release/commit-analyzer": "^9.0.1",
+    "@semantic-release/exec": "^6.0.1",
+    "@semantic-release/git": "^10.0.0",
+    "@semantic-release/release-notes-generator": "^10.0.2",
     "@types/aws-lambda": "^8.10.84",
     "@types/jest": "^27.0.2",
     "@types/node": "^16.10.3",
@@ -64,6 +63,7 @@
     "newman": "^5.3.0",
     "nodemon": "^2.0.13",
     "prettier": "^2.4.1",
+    "semantic-release": "^18.0.0",
     "ts-jest": "^27.0.7",
     "tslint": "^6.1.3",
     "typescript": "^4.4.4"
@@ -73,7 +73,8 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "dependencies": {
-    "winston": "^3.3.3"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phenixcoder/lambda-container-service.git"
   }
 }

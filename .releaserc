@@ -1,0 +1,28 @@
+{
+  "branches": [
+    "main"
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/git",
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "docker build -t lambda-container-service ."
+      }
+    ],
+    [
+      "@semantic-release-plus/docker",
+      {
+        "name": " public.ecr.aws/m0q0z2r6/lambda-container-service",
+        "registryUrl": "public.ecr.aws",
+        "publishLatestTag": true,
+        "publishMajorTag": true,
+        "publishMinorTag": true,
+        "skipLogin"	: true
+      }
+    ]
+  ]
+}
