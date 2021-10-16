@@ -1,4 +1,5 @@
 const express = require('express')
+const { existsSync } = require('fs')
 const { handler } = require('./app/index')
 const newman = require('newman')
 
