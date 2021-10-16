@@ -10,7 +10,6 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "docker build -t lambda-container-service .",
         "publishCmd": "./publish.sh ${nextRelease.version} ${options.branch} ${commits.length} ${Date.now()}"
       }
     ]
