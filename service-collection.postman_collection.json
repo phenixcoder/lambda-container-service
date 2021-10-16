@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "3c25302e-8108-49f1-81b9-e3592900f060",
+		"name": "service-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Empty Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Default test', function () {",
+							"    pm.response.to.have.status(200);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "{}",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:9000/2015-03-31/functions/function/invocations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"2015-03-31",
+						"functions",
+						"function",
+						"invocations"
+					]
+				},
+				"description": "Default test."
+			},
+			"response": []
+		}
+	]
+}

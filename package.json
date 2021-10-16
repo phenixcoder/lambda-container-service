@@ -1,0 +1,79 @@
+{
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "start": "tsc --watch --preserveWatchOutput & nodemon dev-server.js -e js -w ./app",
+    "build": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:newman": "node dev-server.js --test",
+    "lint": "tslint --fix -p ./tsconfig.json",
+    "prettier": "prettier --write './src/**/*.ts?(x)'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "lambda-container-service",
+  "description": "Template to create a aws lambda compatibel function containers",
+  "author": "Balwant",
+  "keywords": [
+    "serverless",
+    "lambda",
+    "aws",
+    "nodejs",
+    "docker",
+    "container",
+    "template"
+  ],
+  "size-limit": [
+    {
+      "path": "dist/function.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/function.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.84",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.10.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.0.1",
+    "express": "^4.17.1",
+    "husky": "^7.0.0",
+    "jest": "^27.2.5",
+    "newman": "^5.3.0",
+    "nodemon": "^2.0.13",
+    "prettier": "^2.4.1",
+    "ts-jest": "^27.0.7",
+    "tslint": "^6.1.3",
+    "typescript": "^4.4.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "winston": "^3.3.3"
+  }
+}
