@@ -2,7 +2,7 @@
   "name": "lambda-container-service",
   "description": "Template to create a aws lambda compatibel function containers",
   "author": "Balwant",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "license": "MIT",
   "keywords": [
     "serverless",
@@ -24,8 +24,8 @@
   "scripts": {
     "start": "tsc --watch --preserveWatchOutput & nodemon dev-server.js -e js -w ./app",
     "build": "tsc",
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch --coverage",
     "test:newman": "node dev-server.js --test",
     "lint": "tslint --fix -p ./tsconfig.json",
     "prettier": "prettier --write './src/**/*.ts?(x)'",
