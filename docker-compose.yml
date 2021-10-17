@@ -4,5 +4,3 @@ services:
         ports:
             - '9000:8080'
         build: .
-        volumes:
-            - .://var/task/

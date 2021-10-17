@@ -2,7 +2,7 @@ Dockerfile
 docker-compose.yml
 *.ts
 **/*.ts
-src
+**/*.test.js
 .husky
 .gitignore
 dev-server.js
@@ -11,4 +11,6 @@ service-collection.postman_collection.json
 tsconfig.json
 tslint.json
 logs
-cocverage
+coverage
+node_modules
+publish.sh

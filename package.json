@@ -24,11 +24,11 @@
   "scripts": {
     "start": "tsc --watch --preserveWatchOutput & nodemon dev-server.js -e js -w ./app",
     "build": "tsc",
-    "test": "jest --coverage",
-    "test:watch": "jest --watch --coverage",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "test:newman": "node dev-server.js --test",
     "lint": "tslint --fix -p ./tsconfig.json",
-    "prettier": "prettier --write './src/**/*.ts?(x)'",
+    "prettier": "prettier --write './**/*.ts?(x)'",
     "release": "semantic-release"
   },
   "husky": {

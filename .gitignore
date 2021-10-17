@@ -125,4 +125,5 @@ dist
 ### Node Patch ###
 # Serverless Webpack directories
 .webpack/
-app
+app/**/*.js
+app/**/*.d.ts
