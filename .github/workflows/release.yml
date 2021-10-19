@@ -19,8 +19,11 @@ jobs:
       - name: Setup and install dependencies
         run: |
           npm ci
-          npm run build
+      - name: Unit tests and Coverage
+        run: |
           npm run test
+      - name: Newman tests
+        run: |
           npm run test:newman
   Publish:
       runs-on: ubuntu-latest

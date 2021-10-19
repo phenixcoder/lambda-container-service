@@ -24,9 +24,9 @@
   "scripts": {
     "start": "tsc --watch --preserveWatchOutput & nodemon dev-server.js -e js -w ./app",
     "build": "tsc",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:newman": "node dev-server.js --test",
+    "test": "find app -wholename '*.d.ts' -delete && find app -wholename '*.js' -delete && jest",
+    "test:watch": "npm t -- --watch",
+    "test:newman": "npm run build && node dev-server.js --test",
     "lint": "tslint --fix -p ./tsconfig.json",
     "prettier": "prettier --write './**/*.ts?(x)'",
     "release": "semantic-release"
