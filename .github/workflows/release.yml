@@ -37,7 +37,7 @@ jobs:
           node-version: 14
       - name: Package 📦 
         run: |
-          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/m0q0z2r6
+          aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 045615149555.dkr.ecr.ap-southeast-2.amazonaws.com
           npm ci
           npm run build
         env: 
