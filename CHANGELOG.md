@@ -5,6 +5,13 @@
 
 * **publish:** migrated to private ECR Repo ([77f4044](https://github.com/phenixcoder/lambda-container-service/commit/77f4044949dbdd375d4f51dd15bf0ab20f334fd1))
 
+# [1.2.0](https://github.com/phenixcoder/lambda-container-service/compare/v1.1.0...v1.2.0) (2021-11-10)
+
+
+### Features
+
+* **publish:** migrated to private ECR Repo ([77f4044](https://github.com/phenixcoder/lambda-container-service/commit/77f4044949dbdd375d4f51dd15bf0ab20f334fd1))
+
 # [1.1.0](https://github.com/phenixcoder/lambda-container-service/compare/v1.0.0...v1.1.0) (2021-10-19)
 
 
