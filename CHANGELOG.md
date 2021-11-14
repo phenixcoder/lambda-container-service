@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/phenixcoder/lambda-container-service/compare/v1.2.0...v1.2.1) (2021-11-14)
+
+
+### Bug Fixes
+
+* **logger:** Removed file loggers ([f484141](https://github.com/phenixcoder/lambda-container-service/commit/f4841410d0c8f5e7aca3a9082809135f795f4e0e))
+
 # [1.2.0](https://github.com/phenixcoder/lambda-container-service/compare/v1.1.0...v1.2.0) (2021-11-10)
 
 
