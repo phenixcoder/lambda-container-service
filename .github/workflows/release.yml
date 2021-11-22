@@ -35,16 +35,11 @@ jobs:
         uses: actions/setup-node@v1.4.5
         with:
           node-version: 14
-      - name: Package 📦 
+      - name: Publish 🚀 
         run: |
           aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 045615149555.dkr.ecr.ap-southeast-2.amazonaws.com
           npm ci
-          npm run build:image
-        env: 
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      - name: Publish 🚀 
-        run: npm run release
+          npm run release
         env: 
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
