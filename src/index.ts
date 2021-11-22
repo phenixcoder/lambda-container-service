@@ -30,8 +30,10 @@ export const handler = async (
       'content-type': 'text/json',
     },
     body: JSON.stringify({
-      hello: 'world',
-      foo: 'bar',
+      version: pkg.version,
+      name: pkg.name,
+      event,
+      context: _context,
     }),
   };
 };

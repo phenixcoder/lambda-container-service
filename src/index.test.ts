@@ -90,8 +90,10 @@ describe('Index Handler', () => {
     const response = await handler(mockRequest(), mockContext());
     expect(response).toStrictEqual({
       body: JSON.stringify({
-        hello: 'world',
-        foo: 'bar',
+        version,
+        name,
+        event: mockRequest(),
+        context: mockContext(),
       }),
       headers: {
         'content-type': 'text/json',

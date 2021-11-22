@@ -32,9 +32,7 @@ const format = winston.format.combine(
   )
 );
 
-const transports = [
-  new winston.transports.Console()
-];
+const transports = [new winston.transports.Console()];
 
 const Logger = winston.createLogger({
   level: level(),
