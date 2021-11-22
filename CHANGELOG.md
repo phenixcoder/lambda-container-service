@@ -10,6 +10,18 @@
 
 * **logger:** added improved logger ([2530e38](https://github.com/phenixcoder/lambda-container-service/commit/2530e3832e5ad53bf0b7e76bb26d6c574720f8a1))
 
+# [1.3.0](https://github.com/phenixcoder/lambda-container-service/compare/v1.2.1...v1.3.0) (2021-11-22)
+
+
+### Bug Fixes
+
+* **newman:** fixed dev server express mapping ([9be5ee3](https://github.com/phenixcoder/lambda-container-service/commit/9be5ee3804eeec84316f36011d3c39e611d9e07c))
+
+
+### Features
+
+* **logger:** added improved logger ([2530e38](https://github.com/phenixcoder/lambda-container-service/commit/2530e3832e5ad53bf0b7e76bb26d6c574720f8a1))
+
 ## [1.2.1](https://github.com/phenixcoder/lambda-container-service/compare/v1.2.0...v1.2.1) (2021-11-14)
 
 
