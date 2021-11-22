@@ -1,0 +1,22 @@
+#!/bin/env node
+
+const { readFileSync, writeFileSync } = require("fs");
+
+const packageString = readFileSync(process.argv[2]);
+
+const { name, version, dependencies, engines, keywords, repository } = JSON.parse(packageString);
+
+const prodJSON = { 
+  name, 
+  version, 
+  dependencies,
+  engines,
+  keywords,
+  repository
+};
+
+
+console.log(prodJSON);
+if (process.argv[3]) {
+  writeFileSync(process.argv[3], JSON.stringify(prodJSON, null, '  '));
+}

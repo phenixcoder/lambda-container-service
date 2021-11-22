@@ -1,6 +1,6 @@
 const express = require('express')
 const { existsSync } = require('fs')
-const { handler } = require('./app/index')
+const { handler } = require('./build/src/index')
 const newman = require('newman')
 
 const app = express();
@@ -20,6 +20,11 @@ app.post('/2015-03-31/functions/function/invocations', async (req, res) => {
 })
 
 app.all('/api', async (req, res) => {
+  handler(req, {}).then(result => {
+    res.send(result);
+  }).catch(error => console.error(error));
+});
+app.all('/__health', async (req, res) => {
   handler(req, {}).then(result => {
     res.send(result);
   }).catch(error => console.error(error));
