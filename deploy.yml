@@ -1,0 +1,17 @@
+envs:
+  # Development environment
+  - name: development
+    auto_merge: false
+    required_contexts: []
+  
+  # Development environment
+  - name: beta
+    auto_merge: false
+    required_contexts: []
+
+  # Production environment
+  - name: production
+    auto_merge: true
+    required_contexts: 
+      - test
+      - docker-image

@@ -1,6 +1,26 @@
 # Lambda Container Service
 > Service template using container based lambda function
 
+## Setup
+1. Create ECR Repo
+2. Add folloeing permissions to Repo which allows Lambda to fetch image.
+```json
+{
+    "Sid": "LambdaECRImageRetrievalPolicy",
+    "Effect": "Allow",
+    "Principal": {
+        "Service": "lambda.amazonaws.com"
+    },
+    "Action": [
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+    ]
+} 
+```
+3. Change the Repo Name in 
+    1. publish.sh:3 (Line 3)
+    2. .github/workflows/release.yml (Line 40; To update login credentials)
+
 ## Developing
 
 Runs a custom dev webserver which hosts the lambda function which can be hosted on  
