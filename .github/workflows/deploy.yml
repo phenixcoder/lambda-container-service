@@ -4,9 +4,6 @@ on:
   deployment:
     branches-ignore:
       - '**'
-
-name: on-deployment
-
 jobs:
   Verify:
     environment: ${{ github.event.deployment.environment }}
