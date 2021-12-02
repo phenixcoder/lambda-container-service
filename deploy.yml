@@ -2,15 +2,18 @@ envs:
   # Development environment
   - name: development
     task: "${GITPLOY_DEPLOY_TASK}${GITPLOY_ROLLBACK_TASK}:lambda-service:development"
+    auto_merge: false
     required_contexts: []
   
   # Development environment
   - name: beta
     task: "${GITPLOY_DEPLOY_TASK}${GITPLOY_ROLLBACK_TASK}:lambda-service:beta"
+    auto_merge: false
     required_contexts: []
 
   # Production environment
   - name: production
     task: "${GITPLOY_DEPLOY_TASK}${GITPLOY_ROLLBACK_TASK}:lambda-service:production"
     production_environment: true
+    auto_merge: false
     required_contexts: []
