@@ -4,6 +4,8 @@ on:
   deployment:
     branches-ignore:
       - '**'
+    tags:
+      - v*
 jobs:
   Verify:
     environment: ${{ github.event.deployment.environment }}
