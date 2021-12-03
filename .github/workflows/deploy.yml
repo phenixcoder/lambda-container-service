@@ -1,7 +1,14 @@
 name: Deploy
 
 on:
-  deployment
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target Environment'     
+        required: true
+      tags:
+        description: 'Release tag to be deployed'
+        required: true 
 jobs:
   Verify:
     environment: ${{ github.event.deployment.environment }}
