@@ -1,11 +1,7 @@
 name: Deploy
 
 on:
-  deployment:
-    branches-ignore:
-      - '**'
-    tags:
-      - v*
+  deployment
 jobs:
   Verify:
     environment: ${{ github.event.deployment.environment }}
