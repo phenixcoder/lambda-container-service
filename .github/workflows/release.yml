@@ -35,6 +35,12 @@ jobs:
         uses: actions/setup-node@v1.4.5
         with:
           node-version: 14
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ap-southeast-2
+          role-to-assume: arn:aws:iam::045615149555:role/service-image-upload
+          role-session-name: service-image-upload-session
       - name: Publish 🚀 
         run: |
           aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin $REPO_REGISTRY
@@ -44,5 +50,3 @@ jobs:
           REPO_NAME: "lambda-container-service"
           REPO_URI: "045615149555.dkr.ecr.ap-southeast-2.amazonaws.com/lambda-container-service"
           REPO_REGISTRY: "045615149555.dkr.ecr.ap-southeast-2.amazonaws.com"
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
