@@ -1,0 +1,69 @@
+#!/bin/env node
+
+const execSync = require('child_process').execSync;
+const { readFileSync, writeFileSync, unlinkSync } = require('fs');
+const POLICY = {
+      "Version" : "2008-10-17",
+      "Statement" : [
+          {
+            "Sid": "LambdaECRImageRetrievalPolicy",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "lambda.amazonaws.com"
+            },
+            "Action": [
+                "ecr:BatchGetImage",
+                "ecr:GetDownloadUrlForLayer"
+            ]
+        }
+      ]
+  };
+  
+const runtimeConfig = {
+  REPO_NAME : process.argv[2],
+  REPO_URI: null,
+  REPO_REGISTRY: null
+}
+try {
+  const repos = execSync(` aws ecr describe-repositories --repository-names=${runtimeConfig.REPO_NAME}`, { stdio: 'pipe'});
+  console.log();
+  runtimeConfig.REPO_URI = JSON.parse(repos.toString()).repositories[0].repositoryUri;
+} catch (error) {
+  console.log(error);
+  const newRepo = execSync(`aws ecr create-repository --repository-name ${runtimeConfig.REPO_NAME}`, { stdio: 'pipe'});
+  runtimeConfig.REPO_URI = JSON.parse(newRepo.toString()).repository.repositoryUri;
+}
+
+if (runtimeConfig.REPO_URI) {
+  runtimeConfig.REPO_REGISTRY = runtimeConfig.REPO_URI.replace(`/${runtimeConfig.REPO_NAME}`, "");
+  console.log('Setting Repo Policy');
+  writeFileSync('./lcs-policy.json', JSON.stringify(POLICY));
+  try {
+    execSync(`aws ecr set-repository-policy --repository-name=${runtimeConfig.REPO_NAME} --policy-text=file://lcs-policy.json`, { stdio: 'pipe'});
+    unlinkSync('./lcs-policy.json');
+    console.log(`Repo policy set on ${runtimeConfig.REPO_NAME} repo.`);
+  } catch (error) {
+    console.log('Error setting policy', error.stderr.toString());
+    unlinkSync('./lcs-policy.json');
+    process.exit(1);
+  }
+}
+
+console.log('\nRuntime Config:');
+console.log('===============');
+console.log('REPO_NAME:', runtimeConfig.REPO_NAME);
+console.log('REPO_URI :', runtimeConfig.REPO_URI);
+console.log('REPO_REGISTRY :', runtimeConfig.REPO_REGISTRY);
+
+console.log("Updating package.json");
+let packageFile = JSON.parse(readFileSync('package.json').toString());
+packageFile.name = runtimeConfig.REPO_NAME;
+writeFileSync('package.json', JSON.stringify(packageFile, null, '  '));
+
+console.log("Updating .github/workflows/release.yml");
+let releaseFile = readFileSync('.github/workflows/release.yml').toString();
+releaseFile = releaseFile.replace('REPO_NAME: "lambda-container-service"', `REPO_NAME: "${runtimeConfig.REPO_NAME}"`);
+releaseFile = releaseFile.replace('REPO_URI: "045615149555.dkr.ecr.ap-southeast-2.amazonaws.com/lambda-container-service"', `REPO_URI: "${runtimeConfig.REPO_URI}"`);
+releaseFile = releaseFile.replace('REPO_REGISTRY: "045615149555.dkr.ecr.ap-southeast-2.amazonaws.com"', `REPO_REGISTRY: "${runtimeConfig.REPO_REGISTRY}"`);
+writeFileSync('.github/workflows/release.yml', releaseFile);
+console.log('Setup Successfull. Please delete this setup script.');
